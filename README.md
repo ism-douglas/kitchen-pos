@@ -30,28 +30,28 @@ A modern web-based kitchen meal tracking system built with PHP, MySQL, and Boots
    ```sql
    CREATE DATABASE kitchen_system;
    USE kitchen_system;
+
+   CREATE TABLE `people` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `full_name` varchar(100) NOT NULL,
+  `category` enum('staff','intern','guest') NOT NULL,
+  PRIMARY KEY (`id`)
+);
+
+  CREATE TABLE `meals` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `person_id` int(11) NOT NULL,
+  `meal_type` enum('breakfast','tea','lunch','supper') NOT NULL,
+  `served_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`person_id`) REFERENCES `people` (`id`)
+);
+
    ```
 
    
    -- Tables
 
-    meals
-
-    id	int(11)	NO	PRI	NULL	auto_increment	
-
-    person_id	int(11)	NO	MUL	NULL		
-
-    meal_type	enum('breakfast','tea','lunch','supper')	NO		NULL	
-
-    served_at	datetime	NO		NULL		
-
-    people
-    
-    id	int(11)	NO	PRI	NULL	auto_increment
-
-    full_name	varchar(100)	NO		NULL	
-    	
-    category	enum('staff','intern','guest')	NO		NULL	
 
 3. Configure database credentials in `db.php`.
 
